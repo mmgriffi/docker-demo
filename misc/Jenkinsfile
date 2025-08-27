@@ -1,5 +1,6 @@
 node {
    def commit_id ="v1.0"
+   env.DOCKER_HOST = 'npipe:////./pipe/dockerDesktopLinuxEngine'
    stage('Preparation') {
      checkout scm
      //batchfile("git rev-parse --short HEAD > commit-id")                        
@@ -21,3 +22,5 @@ node {
    }
 
 }
+
+npipe:////./pipe/dockerDesktopLinuxEngine
