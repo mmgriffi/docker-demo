@@ -7,13 +7,13 @@ node {
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
-       sh 'npm install --only=dev'
-       sh 'npm test'
+       batchfile('npm install --only=dev')         //windows specific command replacement for sh
+       batchfile('npm test')
      }
    }
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
-       def app = docker.build("wardviaene/docker-nodejs-demo:${commit_id}", '.').push()
+       def app = docker.build("mmgriffi/docker-nodejs-demo:${commit_id}", '.').push()
      }
    }
 }
