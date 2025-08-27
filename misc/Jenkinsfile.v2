@@ -24,9 +24,8 @@ node {
         docker run --rm -v "%CD%:/app" -w /app node:16 npm test
         '''
     }
-}
-
-   }
+  }
+  
   //  stage('test with a DB') {
   //    def mysql = docker.image('mysql').run("-e MYSQL_ALLOW_EMPTY_PASSWORD=yes") 
   //    def myTestContainer = docker.image('node:16')
