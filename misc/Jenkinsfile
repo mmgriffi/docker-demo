@@ -15,7 +15,7 @@ node {
    }
    stage('docker build/push') {
     // docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
-     docker.withRegistry('https://index.docker.io/v2/') {}
+     docker.withRegistry('https://index.docker.io/v2/') {
        def app = docker.build("mmgriffi/docker-nodejs-demo:${commit_id}", '.').push()
      }
    }
