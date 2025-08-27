@@ -2,8 +2,11 @@ node {
    def commit_id
    stage('Preparation') {
      checkout scm
-     batchfile("git rev-parse --short HEAD > .git/commit-id"                        
-     commit_id = readFile('.git/commit-id').trim()
+     batchfile("git rev-parse --short HEAD > commit-id"                        
+     //commit_id = readFile('.git/commit-id').trim()
+     //commit_id = batchfile(git rev-parse HEAD) //windows specific command replacement for sh
+     commit_id = "9867ad4"
+
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
