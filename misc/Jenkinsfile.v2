@@ -17,13 +17,12 @@ node {
   //    }
 
   stage('test2') {
-    steps {
         bat '''
         docker pull node:16
         docker run --rm -v "%CD%:/app" -w /app node:16 npm install --include=dev
         docker run --rm -v "%CD%:/app" -w /app node:16 npm test
         '''
-    }
+    
   }
   
   //  stage('test with a DB') {
