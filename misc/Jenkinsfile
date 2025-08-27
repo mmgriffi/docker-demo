@@ -5,7 +5,8 @@ node {
      batchfile("git rev-parse --short HEAD > commit-id"                        
      //commit_id = readFile('.git/commit-id').trim()
      //commit_id = batchfile(git rev-parse HEAD) //windows specific command replacement for sh
-     commit_id = "9867ad4"
+     //commit_id = "9867ad4"
+     def commit_id = "V1.0"
 
    }
    stage('test') {
