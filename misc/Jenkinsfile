@@ -9,8 +9,8 @@ node {
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
-       batchfile('npm install --only=dev')         //windows specific command replacement for sh
-       batchfile('npm test')
+       bat 'npm install --only=dev'         //windows specific command replacement for sh
+       bat 'npm test'
      }
    }
    stage('docker build/push') {
