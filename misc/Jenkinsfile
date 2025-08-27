@@ -1,6 +1,6 @@
 node {
    def commit_id ="v1.0"
-   env.DOCKER_HOST = 'npipe:////./pipe/dockerDesktopLinuxEngine'
+   env.DOCKER_HOST = 'npipe:////./pipe/dockerDesktopLinuxEngine'  //
    stage('Preparation') {
      checkout scm
      //batchfile("git rev-parse --short HEAD > commit-id")                        
@@ -10,13 +10,13 @@ node {
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
-       bat 'npm install --only=dev'         //windows specific command replacement for sh
+       bat 'npm install --include=dev'         //windows specific command replacement for sh. The include=dev is a recent change in npm
        bat 'npm test'
      }
    }
    
       stage('docker build/push') {
-     docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
+     docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {                //added dockerhub credentials in jenkins
        def app = docker.build("mmgriffi/docker-nodejs-demo:${commit_id}", '.').push()
      }
    }
