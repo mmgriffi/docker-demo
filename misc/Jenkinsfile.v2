@@ -8,13 +8,24 @@ node {
      //commit_id = batchfile(git rev-parse HEAD) //windows specific command replacement for sh
 
    }
-   stage('test') {
-      def myTestContainer = docker.image('node:16')
-     myTestContainer.pull()
-    //  myTestContainer.inside {
-    //    bat 'npm install --include=dev'         //windows specific command replacement for sh. The include=dev is a recent change in npm
-    //    bat 'npm test'
-    //  }
+  //  stage('test') {
+  //     def myTestContainer = docker.image('node:16')
+  //    myTestContainer.pull()
+  //    myTestContainer.inside {
+  //      bat 'npm install --include=dev'         //windows specific command replacement for sh. The include=dev is a recent change in npm
+  //      bat 'npm test'
+  //    }
+
+  stage('test2') {
+    steps {
+        bat '''
+        docker pull node:16
+        docker run --rm -v "%CD%:/app" -w /app node:16 npm install --include=dev
+        docker run --rm -v "%CD%:/app" -w /app node:16 npm test
+        '''
+    }
+}
+
    }
   //  stage('test with a DB') {
   //    def mysql = docker.image('mysql').run("-e MYSQL_ALLOW_EMPTY_PASSWORD=yes") 
